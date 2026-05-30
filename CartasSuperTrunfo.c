@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<locale.h>
+
 // Verificar se o sistema é Windows. Se for, incluir a biblioteca.
     #ifdef _WIN32
         #include <windows.h>
@@ -76,7 +77,7 @@ int main () {
     
     Densidade_Populacional2 = (Populacao2 * 1000000.0f) / Area2;
     PIB_per_capita2 = (PIB2 * 1000.0f) / Populacao2;
-
+    
     // --- Exibir dados ---
     printf("\n--- Informações da Carta 1 ---\n");
     printf("Código da Carta: %s\n", CodigoCarta1);
@@ -100,5 +101,26 @@ int main () {
     printf("Densidade Populacional: %.2f hab/km²\n", Densidade_Populacional2); // Adicionado unidade
     printf("PIB per capita: %.2f reais\n", PIB_per_capita2); // Adicionado unidade
     
+    //Comparar as cartas
+    
+	printf("A população da carta 1 (%.2f) é %s que a população da carta 2 (%.2f)\n", Populacao1, (Populacao1 > Populacao2) ? "MAIOR" : ((Populacao1 < Populacao2) ? "MENOR" : "IGUAL"),
+    Populacao2);
+    printf("A área da carta 1 (%.2f) é %s que a área da carta 2 (%.2f)\n", Area1, (Area1 > Area2) ? "MAIOR" : ((Area1 < Area2) ? "MENOR" : "IGUAL"), 
+    Area2);
+	printf("O PIB da carta 1 (%.2f) é %s que o PIB da carta 2 (%.2f)\n", PIB1, (PIB1 > PIB2) ? "MAIOR" : ((PIB1 < PIB2) ? "MENOR" : "IGUAL"), PIB2);
+	printf("O número de pontos turísticos da carta 1 (%d) é %s que o número de pontos turísticos da carta 2 (%d)\n", NumeroPontosTuristicos1, (NumeroPontosTuristicos1 > NumeroPontosTuristicos2) ? "MAIOR" : ((NumeroPontosTuristicos1 < NumeroPontosTuristicos2) ? "MENOR" : "IGUAL"), NumeroPontosTuristicos2);	
+    printf("A densidade populacional da carta 1 (%.2f) é %s que a densidade populacional da carta 2 (%.2f)\n", Densidade_Populacional1, (Densidade_Populacional1 < Densidade_Populacional2) ? "MENOR (VENCE)" : ((Densidade_Populacional1 > Densidade_Populacional2) ? "MAIOR" : "IGUAL"), Densidade_Populacional2);
+	printf("O PIB per Capita da carta 1 (%.2f) é %s que o PIB per Capita da carta 2 (%.2f)\n", PIB_per_capita1, (PIB_per_capita1 > PIB_per_capita2) ? "MAIOR" : ((PIB_per_capita1 < PIB_per_capita2) ? "MENOR" : "IGUAL"), PIB_per_capita2);
+	
+	// --- Cálculo do Super Poder ---
+	float SuperPoder1 = Populacao1 + Area1 + PIB1 + NumeroPontosTuristicos1 + PIB_per_capita1 + (1.0f / Densidade_Populacional1);
+	float SuperPoder2 = Populacao2 + Area2 + PIB2 + NumeroPontosTuristicos2 + PIB_per_capita2 + (1.0f / Densidade_Populacional2);
+
+	// --- Exibir Super Poder e determinar a carta vencedora ---
+	printf("\n--- Super Poder ---\n");
+	printf("Super Poder da Carta 1: %.2f\n", SuperPoder1);
+	printf("Super Poder da Carta 2: %.2f\n", SuperPoder2);
+	printf("Super Poder: Carta %d venceu (%d)\n", (SuperPoder1 > SuperPoder2) ? 1 : ((SuperPoder2 > SuperPoder1) ? 2 : 0), (SuperPoder1 > SuperPoder2) ? 1 : ((SuperPoder2 > SuperPoder1) ? 2 : 0));
+	 
     return 0;   
 }
